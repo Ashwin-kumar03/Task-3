@@ -1,0 +1,22 @@
+{
+  "h1": {
+    "description": "Defines the largest heading.",
+    "usage": "<h1>Your heading</h1>"
+  },
+  "img": {
+    "description": "Embeds an image in the document.",
+    "usage": "<img src='image.jpg' alt='Description'>"
+  },
+  "a": {
+    "description": "Defines a hyperlink.",
+    "usage": "<a href='https://example.com'>Link</a>"
+  },
+  "br": {
+    "description": "Inserts a single line break.",
+    "usage": "<br>"
+  },
+  "div": {
+    "description": "Defines a division or a section.",
+    "usage": "<div>Your content here</div>"
+  }
+}

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTML Tag Info Finder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background:linear-gradient(to right, #b9112d, #8da448);
+      margin: 0;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 5px 3px rgba(0,0,0,0.3);
+      border-radius: 15px;
+      box-shadow: 0 0 100px rgba(0,0,0,0.5);
+      border: 3px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px); 
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input {
+      padding: 12px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      transition: 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #output {
+      margin-top: 25px;
+      font-size: 17px;
+      text-align: left;
+    }
+
+    #output h2 {
+      color: #007bff;
+      font-size: 20px;
+    }
+
+    code {
+      display: block;
+      margin-top: 10px;
+      background-color: #f8f9fa;
+      padding: 10px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>🔍 HTML Tag Info Finder</h1>
+    <input type="text" id="tagInput" placeholder="e.g. h1, img, a" />
+    <button onclick="fetchTagInfo()">Search</button>
+    <div id="output"></div>
+  </div>
+
+  <script>
+    async function fetchTagInfo() {
+      const tag = document.getElementById("tagInput").value.trim().toLowerCase();
+      const output = document.getElementById("output");
+
+      if (!tag) {
+        output.innerHTML = `<p style="color:crimson;">Please enter a tag name.</p>`;
+        return;
+      }
+
+      try {
+        const res = await fetch('html-tags.json'); // Ensure this JSON file is present in the same directory
+        const data = await res.json();
+
+        if (data[tag]) {
+          output.innerHTML = `
+            <h2>&lt;${tag}&gt; Tag</h2>
+            <p><strong>Description:</strong> ${data[tag].description}</p>
+            <p><strong>Usage:</strong></p>
+            <code>${data[tag].usage}</code>
+          `;
+        } else {
+          output.innerHTML = `<p style="color:red;">Tag &lt;${tag}&gt; not found in database.</p>`;
+        }
+      } catch (error) {
+        output.innerHTML = `<p style="color:red;">Error fetching tag information. Make sure 'html-tags.json' is available.</p>`;
+        console.error(error);
+      }
+    }
+  </script>
+
+</body>
+</html>
