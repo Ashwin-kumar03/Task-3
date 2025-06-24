@@ -9,5 +9,5 @@ Apply Responsive Design Using Media Queries :
  
  Fetch Data from an API Using JavaScript :
  Objective: Learn how to work with external APIs to fetch real-time data.
- Actions: Fetch data from a public API (e.g., weather or joke API) and
+ Actions: Fetch data from a API  and
  display the data dynamically on the webpage.
